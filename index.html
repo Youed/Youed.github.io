@@ -368,6 +368,116 @@
 
 
   
+    <article id="post-BuildGithubBlog - 副本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/28/BuildGithubBlog - 副本/">Hexo + Github Pages搭建个人博客</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/28/BuildGithubBlog - 副本/" class="archive-article-date">
+  	<time datetime="2017-07-28T12:33:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前博客都是在cnblogs，心血来潮想要自己搭建个人博客，前后花了大半天时间，看了很多相关教程。作为一个Developer，有一个自己的博客，写下自己的经验，写下自己的生活必不可少，积累是一个人一生最宝贵的财富。<br>首先我们先了解一下Github，GithubPages，以及hexo。<br><strong>GitHub</strong><br>GitHub是基于git实现的代码托管。<br><strong>GithubPages</strong><br>用户编写的，托管在GitHub上的静态网页。<br><strong>Hexo</strong><br>A fast, simple &amp; powerful blog framework。<br><strong>系统环境配置</strong><br>要使用Hexo，需要在你的系统中支持Nodejs以及Git。   </p>
+<hr>
+<h4 id="Step1-安装Node-js"><a href="#Step1-安装Node-js" class="headerlink" title="Step1:安装Node.js"></a>Step1:安装Node.js</h4><p><a href="https://nodejs.org/download/" title="Step1:安装Node.js" target="_blank" rel="external">下载Node.js</a><br>参考地址：<a href="http://www.runoob.com/nodejs/nodejs-install-setup.html" title="安装Node.js" target="_blank" rel="external">安装Node.js</a><strong>（注意node需安装6.2版本以上的，否则不兼容Yilia）</strong>  </p>
+<hr>
+<h4 id="Step2：安装Git"><a href="#Step2：安装Git" class="headerlink" title="Step2：安装Git"></a>Step2：安装Git</h4><p><a href="http://git-scm.com/download/" title="下载Git" target="_blank" rel="external">下载Git</a><br>这里附一个Git的入门教程。<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/" title="Git教程" target="_blank" rel="external">廖雪峰Git教程</a>  </p>
+<hr>
+<h4 id="Step3-安装hexo"><a href="#Step3-安装hexo" class="headerlink" title="Step3:安装hexo"></a>Step3:安装hexo</h4> <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> cd d:/hexo</div><div class="line"><span class="meta">$</span> npm install hexo-cli -g  </div><div class="line"><span class="meta">$</span> hexo init blog</div><div class="line"><span class="meta">$</span> cd blog</div><div class="line"><span class="meta">$</span> npm install</div><div class="line"><span class="meta">$</span> hexo g # 或者hexo generate</div><div class="line"><span class="meta">$</span> hexo s # 或者hexo server，可以在http://localhost:4000/ 查看</div></pre></td></tr></table></figure>
+<p><strong>如果你想折腾，给自己的blog疯狂加插件，这里最好安装cnpm</strong>（<a href="https://npm.taobao.org" target="_blank" rel="external">https://npm.taobao.org</a>）防止被墙（我已遇到过），以后将npm换成cnpm即可。命令:  </p>
+<pre><code class="shell"><span class="meta">$</span> cd d:/hexo  //进自己的root目录
+<span class="meta">$</span> npm install -g cnpm --registry=https://registry.npm.taobao.org
+<span class="meta">$</span> cnpm install hexo --save
+<span class="meta">$</span> hexo -v
+</code></pre>
+<p><img src="http://i.imgur.com/NHajyOH.png" alt=""><br>Hexo常用的几个命令：<br>hexo generate (hexo g) 生成静态文件，会在当前目录下生成一个新的叫做public的文件夹<br>hexo server (hexo s) 启动本地web服务，用于博客的预览<br>hexo deploy (hexo d) 部署播客到远端（比如github, heroku等平台）<br>另外还有其他几个常用命令:  </p>
+<pre><code class="shell"><span class="meta">$</span> hexo new "postName" #新建文章 $ hexo new page "pageName" #新建页面
+<span class="meta">$</span> hexo n == hexo new 
+<span class="meta">$</span> hexo g == hexo generate 
+<span class="meta">$</span> hexo s == hexo server
+<span class="meta">$</span> hexo d == hexo deploy
+<span class="meta">$</span> hexo d -g          #生成部署 
+<span class="meta">$</span> hexo s -g          #生成预览
+<span class="meta">$</span> hexo s -p 3600     #换端口号。当hexo s -g不起作用主要是2个问题，1.端口冲突，用此命令换端口 2，修改host文件
+</code></pre>
+<p>现在我们打开<a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a> 已经可以看到一篇内置的blog了。  </p>
+<h4 id="Step4-安装主题"><a href="#Step4-安装主题" class="headerlink" title="Step4:安装主题"></a>Step4:安装主题</h4><p>Github上最火的主题有NexT与Yilia。想折腾的这里选NexT（官网：<a href="http://theme-next.iissnan.com/" target="_blank" rel="external">http://theme-next.iissnan.com/</a>）<br>安装主题<br>    <code>$ git clone https://github.com/litten/hexo-theme-yilia.git themes/yilia</code><br>在Root有两份主要的配置文件，其名称都是 _config.yml。 其中，一份位于站点根目录下主要包含 Hexo 本身的配置，称为<strong>站点配置文件</strong>；另一份位于主题目录下，这份配置由主题作者提供，主要用于配置主题相关的选项，称为<strong>主题配置文件</strong>。<br>想要搭配自己的插件即配置这2个文件。  </p>
+<h4 id="Step5-发布Blog"><a href="#Step5-发布Blog" class="headerlink" title="Step5:发布Blog"></a>Step5:发布Blog</h4><p>第一次登录需要验证身份信息:  </p>
+<pre><code class="shell"><span class="meta">$</span> git config --global user.name "你的用户名"
+<span class="meta">$</span> git config --global user.email "你的邮箱"
+<span class="meta">$</span> cnpm install hexo-deployer-git --save  //安装Git插件
+<span class="meta">$</span> hexo new "hello"  #生成一个md文件(/blog/source/_posts/),用编辑器打开hello.md文件,编写完后保存
+<span class="meta">$</span> hexo s -g   # 一般先在本地预览
+<span class="meta">$</span> hexo d -g   #发布成功后，访问yourname.github.io看下成果
+</code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Github</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hexo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/28/BuildGithubBlog - 副本/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
 
 
