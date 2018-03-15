@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Ubuntu（16.04)  anaconda安装tensorflow | CaoK&#39; Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="###安装Anaconda###我开始在一台公用服务器上用了别人装好的anaconda，后面conda install会出现点问题问题说明：http://blog.csdn.net/marleylee/article/details/70808953下载地址：https://www.continuum.io/downloads 。得到anaconda.sh文件 bash /home/caokai/">
+  <meta name="description" content="安装Anaconda我开始在一台公用服务器上用了别人装好的anaconda，后面conda install会出现点问题问题说明：http://blog.csdn.net/marleylee/article/details/70808953下载地址：https://www.continuum.io/downloads得到anaconda.sh文件 bash /home/caokai/Download">
 <meta name="keywords" content="ubuntu,anaconda,tensorflow">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu（16.04)  anaconda安装tensorflow">
 <meta property="og:url" content="http://yoursite.com/2017/09/28/Ubuntu（16.04)  anaconda安装tensorflow/index.html">
 <meta property="og:site_name" content="CaoK&#39; Blog">
-<meta property="og:description" content="###安装Anaconda###我开始在一台公用服务器上用了别人装好的anaconda，后面conda install会出现点问题问题说明：http://blog.csdn.net/marleylee/article/details/70808953下载地址：https://www.continuum.io/downloads 。得到anaconda.sh文件 bash /home/caokai/">
+<meta property="og:description" content="安装Anaconda我开始在一台公用服务器上用了别人装好的anaconda，后面conda install会出现点问题问题说明：http://blog.csdn.net/marleylee/article/details/70808953下载地址：https://www.continuum.io/downloads得到anaconda.sh文件 bash /home/caokai/Download">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-15T09:50:56.081Z">
+<meta property="og:updated_time" content="2018-03-15T10:11:07.496Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu（16.04)  anaconda安装tensorflow">
-<meta name="twitter:description" content="###安装Anaconda###我开始在一台公用服务器上用了别人装好的anaconda，后面conda install会出现点问题问题说明：http://blog.csdn.net/marleylee/article/details/70808953下载地址：https://www.continuum.io/downloads 。得到anaconda.sh文件 bash /home/caokai/">
+<meta name="twitter:description" content="安装Anaconda我开始在一台公用服务器上用了别人装好的anaconda，后面conda install会出现点问题问题说明：http://blog.csdn.net/marleylee/article/details/70808953下载地址：https://www.continuum.io/downloads得到anaconda.sh文件 bash /home/caokai/Download">
   
     <link rel="alternative" href="/atom.xml" title="CaoK&#39; Blog" type="application/atom+xml">
   
@@ -183,17 +183,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>###安装Anaconda###<br>我开始在一台公用服务器上用了别人装好的anaconda，后面conda install会出现点问题<br>问题说明：<br><a href="http://blog.csdn.net/marleylee/article/details/70808953" target="_blank" rel="external">http://blog.csdn.net/marleylee/article/details/70808953</a><br>下载地址：<br><a href="https://www.continuum.io/downloads" target="_blank" rel="external">https://www.continuum.io/downloads</a> 。<br>得到anaconda.sh文件<br> <pre>bash /home/caokai/Downloads/anaconda.sh </pre><br>一直按回车，输入yes。安装完成。<br>此时，notebooks和一些python包都被成功安装了,但对于环境变量的更改,<strong>必须要新打开一个terminal才能生效</strong>,否则,相关的指令都不会被认识<br>输入 jupyter notebook；打开浏览器:<a href="http://localhost:8888/tree" target="_blank" rel="external">http://localhost:8888/tree</a></p>
-<p>###安装tensorflow###<br>安装tensorflow</p>
+        <p><strong>安装Anaconda</strong><br>我开始在一台公用服务器上用了别人装好的anaconda，后面conda install会出现点问题<br>问题说明：<br><a href="http://blog.csdn.net/marleylee/article/details/70808953" target="_blank" rel="external">http://blog.csdn.net/marleylee/article/details/70808953</a><br>下载地址：<br><a href="https://www.continuum.io/downloads" target="_blank" rel="external">https://www.continuum.io/downloads</a><br>得到anaconda.sh文件<br> <pre>bash /home/caokai/Downloads/anaconda.sh </pre><br>一直按回车，输入yes。安装完成。<br>此时，notebooks和一些python包都被成功安装了,但对于环境变量的更改,<strong>必须要新打开一个terminal才能生效</strong>,否则,相关的指令都不会被认识<br>输入 jupyter notebook；打开浏览器:<a href="http://localhost:8888/tree" target="_blank" rel="external">http://localhost:8888/tree</a></p>
+<p><strong>安装tensorflow</strong></p>
 <pre>conda create -n tensorflow python=3.6 </pre>
 （**一定要指定python版本**，我一开始没有写python=3.6，后面各种失败）
-先下载安装包，下载路径为：[https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.0.0-cp36-cp36m-linux_x86_64.whl](https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.0.0-cp36-cp36m-linux_x86_64.whl) （需要翻墙，我是在本地下好复制到服务器上的）
+先下载安装包，下载路径为
+[https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.0.0-cp36-cp36m-linux_x86_64.whl](https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.0.0-cp36-cp36m-linux_x86_64.whl)
+（需要翻墙，我是在本地下好复制到服务器上的）
 下载之后，将whl文件重命名为<pre>tensorflow-1.0.0-py3-none-linux_x86_64.whl</pre>，否则会出现
 <pre>tensorflow-1.0.0-cp36-cp36m-linux_x86_64.whl is not a supported wheel on this platform.</pre>
 然后进入环境并安装tensorflow
 <pre>source activate tensorflow #激活tensorflow环境
 cd /Downloads #切换到whl文件所在文件夹
-pip install --ignore-installed --upgrade tensorflow-1.0.0-py3-none-linux_x86_64.whl #**切记，不要用sudo pip，也不要用pip3，然后--ignore-installed --upgrade等参数也不能省略，否则会出错。**</pre>
+pip install --ignore-installed --upgrade tensorflow-1.0.0-py3-none-linux_x86_64.whl #切记，不要用sudo pip，也不要用pip3，然后--ignore-installed --upgrade等参数也不能省略，否则会出错</pre>
 接下来验证成功
 <pre>source activate tensorflow
 (tensorflow)$ python
@@ -204,7 +206,7 @@ sess.run(hello) </pre>
 **注意：**
 anaconda默认开的ip是本机，在其他机器使用服务修改配置文件，改为0.0.0.0
 <pre>vim ~/.jupyter/jupyter_notebook_config.py</pre> 
-![](https://i.imgur.com/YzcjCoX.png)
+![](https://i.imgur.com/KsjgL3f.png)
 **在jupyter中使用tensorflow**
 安装如上方法安装了jupyter和tensorflow,结果,利用jupyter无法使用tensorflow 
 ![](https://i.imgur.com/koBYC2G.png)
