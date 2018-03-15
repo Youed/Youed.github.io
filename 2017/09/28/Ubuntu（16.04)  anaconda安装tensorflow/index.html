@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="CaoK&#39; Blog">
 <meta property="og:description" content="安装Anaconda我开始在一台公用服务器上用了别人装好的anaconda，后面conda install会出现点问题问题说明：http://blog.csdn.net/marleylee/article/details/70808953下载地址：https://www.continuum.io/downloads得到anaconda.sh文件 bash /home/caokai/Download">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-15T10:11:07.496Z">
+<meta property="og:updated_time" content="2018-03-15T10:16:48.543Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu（16.04)  anaconda安装tensorflow">
 <meta name="twitter:description" content="安装Anaconda我开始在一台公用服务器上用了别人装好的anaconda，后面conda install会出现点问题问题说明：http://blog.csdn.net/marleylee/article/details/70808953下载地址：https://www.continuum.io/downloads得到anaconda.sh文件 bash /home/caokai/Download">
@@ -203,7 +203,7 @@ import tensorflow as tf
 hello = tf.constant('Hello, TensorFlow!')
 sess = tf.Session()
 sess.run(hello) </pre>
-**注意：**
+**注意**
 anaconda默认开的ip是本机，在其他机器使用服务修改配置文件，改为0.0.0.0
 <pre>vim ~/.jupyter/jupyter_notebook_config.py</pre> 
 ![](https://i.imgur.com/KsjgL3f.png)
