@@ -163,6 +163,130 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Ubuntu（16.04)  anaconda安装tensorflow" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/28/Ubuntu（16.04)  anaconda安装tensorflow/">Ubuntu（16.04)  anaconda安装tensorflow</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/28/Ubuntu（16.04)  anaconda安装tensorflow/" class="archive-article-date">
+  	<time datetime="2017-09-28T02:53:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###安装Anaconda###<br>我开始在一台公用服务器上用了别人装好的anaconda，后面conda install会出现点问题<br>问题说明：<br><a href="http://blog.csdn.net/marleylee/article/details/70808953" target="_blank" rel="external">http://blog.csdn.net/marleylee/article/details/70808953</a><br>下载地址：<br><a href="https://www.continuum.io/downloads" target="_blank" rel="external">https://www.continuum.io/downloads</a> 。<br>得到anaconda.sh文件<br> <pre>bash /home/caokai/Downloads/anaconda.sh </pre><br>一直按回车，输入yes。安装完成。<br>此时，notebooks和一些python包都被成功安装了,但对于环境变量的更改,<strong>必须要新打开一个terminal才能生效</strong>,否则,相关的指令都不会被认识<br>输入 jupyter notebook；打开浏览器:<a href="http://localhost:8888/tree" target="_blank" rel="external">http://localhost:8888/tree</a></p>
+<p>###安装tensorflow###<br>安装tensorflow</p>
+<pre>conda create -n tensorflow python=3.6 </pre>
+（**一定要指定python版本**，我一开始没有写python=3.6，后面各种失败）
+先下载安装包，下载路径为：[https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.0.0-cp36-cp36m-linux_x86_64.whl](https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.0.0-cp36-cp36m-linux_x86_64.whl) （需要翻墙，我是在本地下好复制到服务器上的）
+下载之后，将whl文件重命名为<pre>tensorflow-1.0.0-py3-none-linux_x86_64.whl</pre>，否则会出现
+<pre>tensorflow-1.0.0-cp36-cp36m-linux_x86_64.whl is not a supported wheel on this platform.</pre>
+然后进入环境并安装tensorflow
+<pre>source activate tensorflow #激活tensorflow环境
+cd /Downloads #切换到whl文件所在文件夹
+pip install --ignore-installed --upgrade tensorflow-1.0.0-py3-none-linux_x86_64.whl #**切记，不要用sudo pip，也不要用pip3，然后--ignore-installed --upgrade等参数也不能省略，否则会出错。**</pre>
+接下来验证成功
+<pre>source activate tensorflow
+(tensorflow)$ python
+import tensorflow as tf
+hello = tf.constant('Hello, TensorFlow!')
+sess = tf.Session()
+sess.run(hello) </pre>
+**注意：**
+anaconda默认开的ip是本机，在其他机器使用服务修改配置文件，改为0.0.0.0
+<pre>vim ~/.jupyter/jupyter_notebook_config.py</pre> 
+![](https://i.imgur.com/YzcjCoX.png)
+**在jupyter中使用tensorflow**
+安装如上方法安装了jupyter和tensorflow,结果,利用jupyter无法使用tensorflow 
+![](https://i.imgur.com/koBYC2G.png)
+这个问题搞了好长时间没搞定。应该是在conda的tensorflow环境下没有jupyter,它无法使用之前anaconda安装的jupyter,那么,简单粗暴的方法就是在当前的conda-tensorflow环境下,再安装一次jupyter:（参考了[http://stackoverflow.com/questions/35771285/using-tensorflow-through-jupyter-python-3](http://stackoverflow.com/questions/35771285/using-tensorflow-through-jupyter-python-3)）
+ <pre>  ● 打开terminal
+  ● 激活conda tensorflow环境:source activate tensorflow
+  ● 安装notebook:conda install ipython
+  ● 安装jupyter:conda install jupyter
+  ● 安装完成,仍在conda tensorflow的环境下,输入jupyter notebook,打开http://localhost:8889/tree#
+  ● import tensorflow,发现tensorflow可以使用了</pre>
+**其他**
+在正常的ternimal中打开的是之前在安装anacodna时安装的jupyter；
+在conda tensorflow环境下打开的jupyter是在conda tensorflow环境下新安装的tensorflow,与上面的jupyter不同 它在conda的env下的tensorflow的bin文件夹下
+![](https://i.imgur.com/mW5vqk5.png)
+其他：缺少模块及安装 
+<pre>- ImportError: no module named Image, ImportError: no module named PIL </pre>
+解决:
+<pre>conda install pillow</pre>
+
+
+<p>参考blog:<a href="http://blog.csdn.net/tina_ttl/article/details/51762471" target="_blank" rel="external">http://blog.csdn.net/tina_ttl/article/details/51762471</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ubuntu</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">anaconda</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">tensorflow</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/28/Ubuntu（16.04)  anaconda安装tensorflow/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-install xgboost in Anaconda Python (Windows platform)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -546,7 +670,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 Kydnn Cao
+    		&copy; 2018 Kydnn Cao
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -670,6 +794,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Decision Tree</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">anaconda</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
               </li>
             
             <div class="clearfix"></div>
