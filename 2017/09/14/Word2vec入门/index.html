@@ -6,31 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Mechine Learning ---Decision Tree | CaoK&#39; Blog</title>
+  <title>在windows上面安装并用jupyter运行pyspark | CaoK&#39; Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="参考书籍《西瓜书》《统计学习方法》决策树的特征选择信息增益（ID3）  信息增益比（C4.5）  GINI(CART)熵表示随机变量不确定性的度量值越小，D的纯度越高。条件熵在已知随机变量X的条件下随机变量Y的不确定性信息增益表示得知特征X的信息而使得类Y的信息的不确定性减小的程度。信息增益可能对可取数目较少的属性有所偏好，所以出现了增益率。增益率HINI指数反映从数据集D中随机抽取两个样本，其类">
-<meta name="keywords" content="Mechine Learning,Decision Tree">
+  <meta name="description" content="由于个人的测试需要，打算在自己的pc上面安pyspark，来熟悉MLlib。翻了一下bing和狗，方法不少。这里主要介绍下在windows下的安装（安装的时候总是出现各种问题，有条件的还是操作unix吧）我是根据视频https://medium.com/@GalarnykMichael/install-spark-on-windows-pyspark-4498a5d8d66c来操作的，需要翻墙，有">
+<meta name="keywords" content="Windows,Jupyter,Pyspark">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mechine Learning ---Decision Tree">
-<meta property="og:url" content="http://yoursite.com/2017/08/01/Mechine Learning ---Decision Tree/index.html">
+<meta property="og:title" content="在windows上面安装并用jupyter运行pyspark">
+<meta property="og:url" content="http://yoursite.com/2017/09/14/Word2vec入门/index.html">
 <meta property="og:site_name" content="CaoK&#39; Blog">
-<meta property="og:description" content="参考书籍《西瓜书》《统计学习方法》决策树的特征选择信息增益（ID3）  信息增益比（C4.5）  GINI(CART)熵表示随机变量不确定性的度量值越小，D的纯度越高。条件熵在已知随机变量X的条件下随机变量Y的不确定性信息增益表示得知特征X的信息而使得类Y的信息的不确定性减小的程度。信息增益可能对可取数目较少的属性有所偏好，所以出现了增益率。增益率HINI指数反映从数据集D中随机抽取两个样本，其类">
+<meta property="og:description" content="由于个人的测试需要，打算在自己的pc上面安pyspark，来熟悉MLlib。翻了一下bing和狗，方法不少。这里主要介绍下在windows下的安装（安装的时候总是出现各种问题，有条件的还是操作unix吧）我是根据视频https://medium.com/@GalarnykMichael/install-spark-on-windows-pyspark-4498a5d8d66c来操作的，需要翻墙，有">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/DvzQTD1.png">
-<meta property="og:image" content="https://i.imgur.com/7sOIhQt.png">
-<meta property="og:image" content="https://i.imgur.com/Qwi5qoG.png">
-<meta property="og:image" content="https://i.imgur.com/iXqQStj.png">
-<meta property="og:image" content="https://i.imgur.com/Sw23uZF.png">
-<meta property="og:image" content="https://i.imgur.com/l4ZlAOa.png">
-<meta property="og:image" content="https://i.imgur.com/z6cSdoM.png">
-<meta property="og:image" content="https://i.imgur.com/WiZtSGh.png">
-<meta property="og:image" content="https://i.imgur.com/PFOdO0r.png">
-<meta property="og:image" content="https://i.imgur.com/Icemtyr.png">
-<meta property="og:updated_time" content="2017-11-03T09:31:35.438Z">
+<meta property="og:image" content="https://i.imgur.com/arthoZr.png">
+<meta property="og:updated_time" content="2018-03-20T06:16:16.171Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mechine Learning ---Decision Tree">
-<meta name="twitter:description" content="参考书籍《西瓜书》《统计学习方法》决策树的特征选择信息增益（ID3）  信息增益比（C4.5）  GINI(CART)熵表示随机变量不确定性的度量值越小，D的纯度越高。条件熵在已知随机变量X的条件下随机变量Y的不确定性信息增益表示得知特征X的信息而使得类Y的信息的不确定性减小的程度。信息增益可能对可取数目较少的属性有所偏好，所以出现了增益率。增益率HINI指数反映从数据集D中随机抽取两个样本，其类">
-<meta name="twitter:image" content="https://i.imgur.com/DvzQTD1.png">
+<meta name="twitter:title" content="在windows上面安装并用jupyter运行pyspark">
+<meta name="twitter:description" content="由于个人的测试需要，打算在自己的pc上面安pyspark，来熟悉MLlib。翻了一下bing和狗，方法不少。这里主要介绍下在windows下的安装（安装的时候总是出现各种问题，有条件的还是操作unix吧）我是根据视频https://medium.com/@GalarnykMichael/install-spark-on-windows-pyspark-4498a5d8d66c来操作的，需要翻墙，有">
+<meta name="twitter:image" content="https://i.imgur.com/arthoZr.png">
   
     <link rel="alternative" href="/atom.xml" title="CaoK&#39; Blog" type="application/atom+xml">
   
@@ -174,27 +165,35 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Mechine Learning ---Decision Tree" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Word2vec入门" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Mechine Learning ---Decision Tree
+      在windows上面安装并用jupyter运行pyspark
     </h1>
   
 
         
-        <a href="/2017/08/01/Mechine Learning ---Decision Tree/" class="archive-article-date">
-  	<time datetime="2017-08-01T12:33:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-01</time>
+        <a href="/2017/09/14/Word2vec入门/" class="archive-article-date">
+  	<time datetime="2017-09-14T11:14:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-14</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>参考书籍《西瓜书》《统计学习方法》<br><strong>决策树的特征选择</strong><br>信息增益（ID3）  信息增益比（C4.5）  GINI(CART)<br><strong>熵</strong><br>表示随机变量不确定性的度量<br><img src="https://i.imgur.com/DvzQTD1.png" alt=""><br><img src="https://i.imgur.com/7sOIhQt.png" alt=""><br>值越小，D的纯度越高。<br><strong>条件熵</strong><br>在已知随机变量X的条件下随机变量Y的不确定性<br><strong>信息增益</strong><br>表示得知特征X的信息而使得类Y的信息的不确定性减小的程度。<br><img src="https://i.imgur.com/Qwi5qoG.png" alt=""><br>信息增益可能对可取数目较少的属性有所偏好，所以出现了增益率。<br><strong>增益率</strong><br><img src="https://i.imgur.com/iXqQStj.png" alt=""><br><strong>HINI指数</strong><br>反映从数据集D中随机抽取两个样本，其类别标记不一致的概率。因此值越小，数据集D的纯度越高。<br><img src="https://i.imgur.com/Sw23uZF.png" alt=""><br><img src="https://i.imgur.com/l4ZlAOa.png" alt=""><br><strong>剪枝</strong><br>是防止过拟合的主要手段。分为预剪枝和后剪枝。<br><img src="https://i.imgur.com/z6cSdoM.png" alt=""><br><strong>连续值的处理</strong><br>连续属性离散化技术—-二分法（西瓜书P86实例）<br><img src="https://i.imgur.com/WiZtSGh.png" alt=""><br><img src="https://i.imgur.com/PFOdO0r.png" alt=""><br><img src="https://i.imgur.com/Icemtyr.png" alt=""><br><strong>缺失值的处理</strong>（西瓜书P87实例）<br>会遇到的2个问题：<br>1.如何在属性值缺失的情况下进行划分属性选择？<br>2.给定划分属性，若样本在该属性上的值缺失，如何对样本进行划分？<br><strong>多变量决策树</strong></p>
+        <p>由于个人的测试需要，打算在自己的pc上面安pyspark，来熟悉MLlib。<br>翻了一下bing和狗，方法不少。这里主要介绍下在windows下的安装（安装的时候总是出现各种问题，有条件的还是操作unix吧）<br>我是根据视频<a href="https://medium.com/@GalarnykMichael/install-spark-on-windows-pyspark-4498a5d8d66c" target="_blank" rel="external">https://medium.com/@GalarnykMichael/install-spark-on-windows-pyspark-4498a5d8d66c</a>来操作的，需要翻墙，有条件的同学可以看下，讲的特别详细。</p>
+<hr>
+<h4 id="Step1-安装Anaconda-GOW"><a href="#Step1-安装Anaconda-GOW" class="headerlink" title="Step1:安装Anaconda,GOW"></a>Step1:安装Anaconda,GOW</h4><p>前者的安装我就不写了。地址是<br><a href="https://repo.continuum.io/archive/" target="_blank" rel="external">https://repo.continuum.io/archive/</a><br>我的机器上面装的miniconda。<br>GOW的地址：<br><a href="https://github.com/bmatzelle/gow/releases/download/v0.8.0/Gow-0.8.0.exe" target="_blank" rel="external">https://github.com/bmatzelle/gow/releases/download/v0.8.0/Gow-0.8.0.exe</a><br>GOW的作用是在cmd下面执行linux 命令。安装结束之后可以运行：<br>    gow –list<br>如果安装正确，可以返回<br><img src="https://i.imgur.com/arthoZr.png" alt=""></p>
+<hr>
+<h4 id="Step2：安装spark"><a href="#Step2：安装spark" class="headerlink" title="Step2：安装spark"></a>Step2：安装spark</h4><p>spark的地址：<br><a href="http://spark.apache.org/downloads.html" target="_blank" rel="external">http://spark.apache.org/downloads.html</a><br>我选的是default的设置下的版本: spark-2.1.1-bin-hadoop2.7.tgz.<br>下载好后，记一下路径名称。<br> <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">open cmd prompt</div><div class="line">mkdir C:\opt\spark</div><div class="line">mv C:\Users\neal\Downloads\spark-2.1.1-bin-hadoop2.7.tgz C:\opt\spark\spark-2.1.1-bin-hadoop2.7.tgz</div><div class="line">gzip -d spark-2.1.1-bin-hadoop2.7.tgz</div><div class="line">tar xvf spark-2.1.1-bin-hadoop2.7.tar</div><div class="line">install winutils.exe</div><div class="line">curl -k -L -o winutils.exe https://github.com/steveloughran/winutils/blOb/master/hadoop-2.6.0/bin/winutils.exe?raw=<span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>下面要确认java与hadoop已经安装（这里不再说了）<br><strong>设置路径</strong><br> <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">setx SPARK_HOME C:\opt\spark\spark-2.1.1-bin-hadoop2.7</div><div class="line">setx HADOOP_HOME C:\opt\spark\spark-2.1.1-bin-hadoop2.7</div><div class="line">setx PYSPARK_DRIVER_PYTHON ipython</div><div class="line">setx PYSPARK_DRIVER_PYTHON_OPTS notebook</div><div class="line">把“ ;C:\opt\spark\spark-2.1.0-bin-hadoop2.7\bin ”加到系统路径里面。如果没有系统权限，可以加入到用户路径下面。</div></pre></td></tr></table></figure></p>
+<p><strong>这里一定要注意，spark与hadoop的版本要对应</strong><br>到这一。步，pyspark就已经装好了<br><strong>使用spark</strong><br>    pyspark –master local[2]<br>这个会打开ipython notebook<br> <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sc = SparkContext.getOrCreate()</div><div class="line">import numpy as np</div><div class="line">TOTAL = 1000000</div><div class="line">dots = sc.parallelize([2.0 * np.random.random(2) - 1.0 <span class="keyword">for</span> i <span class="keyword">in</span> range(TOTAL)]).cache()</div><div class="line"><span class="built_in">print</span>(dots.count())</div></pre></td></tr></table></figure></p>
+<hr>
+<p>如果得到的输出是’1000000‘,说明系统正常。如果出现error，可以回头看一下路径是否正确。</p>
 
       
 
@@ -229,11 +228,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Mechine Learning</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Windows</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Decision Tree</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Jupyter</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Pyspark</a>
         		</li>
       		
 		</ul>
@@ -289,7 +292,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/08/01/Mechine Learning ---Decision Tree/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/09/14/Word2vec入门/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -303,7 +306,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/09/14/深度学习系列——CNN入门/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/09/14/LSTM入门/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -313,8 +316,8 @@
     </a>
   
   
-    <a href="/2017/07/28/BuildGithubBlog/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hexo + Github Pages搭建个人博客</div>
+    <a href="/2017/09/14/深度学习系列——CNN入门/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">在windows上面安装并用jupyter运行pyspark</div>
       <i class="icon-circle-right"></i>
     </a>
   
