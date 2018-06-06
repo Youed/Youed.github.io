@@ -163,6 +163,93 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-word2vec入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/02/word2vec入门/">DeepLearning——Word2vec笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/02/word2vec入门/" class="archive-article-date">
+  	<time datetime="2017-11-02T13:24:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="常见的统计语言模型"><a href="#常见的统计语言模型" class="headerlink" title="常见的统计语言模型"></a>常见的统计语言模型</h2><p>参考：有道的Deep Learning 实战之 word2vec<br><strong>1. 上下文无关模型</strong><br><strong>2. n-gram</strong><br><strong>3. n-pos</strong><br> n-pos 只是 n-gram 的一种衍生模型。n-gram 模型假定第t个词出现概率条件依赖它前N-1个词，而现实中很多词出现的概率是条件依赖于它前面词的语法功能的。n-pos模型就是基于这种假设的模型，它将词按照其语法功能进行分类，由这些词类决定下一个词出现的概率。这样的词类称为词性（Part-of-Speech，简称为 POS）<br><strong>4. 基于决策树的语言模型</strong><br><strong>5. 最大熵模型</strong><br><strong>6. 自适应模型</strong><br>前面的模型概率分布都是预先从训练语料库中估算好的，属于<strong>静态语言模型</strong>。而自适应语言模型类似是 Online Learning 的过程，即根据少量新数据动态调整模型，属于动态模型。 在自然语言中，经常出现这样现象：某些在文本中通常很少出现的词，在某一局部文本中突然大量地出现。能够根据词在局部文本中出现的情况动态地调整语言模型中的概率分布数据的语言模型成为动态、自适应或者基于缓存的语言模型。 通常的做法是将静态模型与动态模型通过参数融合到一起，这种混合模型可以有效地避免数据稀疏的问题。</p>
+<h2 id="g-gram模型"><a href="#g-gram模型" class="headerlink" title="g-gram模型"></a>g-gram模型</h2><p>传统的统计语言模型是表示语言基本单位（一般为句子） 的概率分布函数，这个概率分布也就是该语言的生成模型。一般语言模型可以使用各个词语条件概率的形式表示</p>
+<p><img src="https://i.imgur.com/GYZMvgQ.png" alt=""><br><img src="https://i.imgur.com/V6zqbLl.png" alt=""><br>$$p(s)=p(w_1^T)=p(w_1,w_2,\ldots,w<em>T)=\prod</em>{t=1}^Tp(w_t|Context)$$</p>
+<p><strong>关于n的取值</strong><br>一般来说，$n$的取值需要同时考虑计算复杂度和模型效果2个方面。如表1所示：（词典大小为20000）<br><img src="https://i.imgur.com/9Qcqg7Q.png" alt=""><br>另外，n-gram模型还需要<strong>平滑化</strong>的环节</p>
+<p><strong>hierarchical softmax本质</strong>是把 N 分类问题变成 log(N)次二分类<br><strong>negative sampling本质</strong>是预测总体类别的一个子集</p>
+<p><strong>Python Word2Vec参数内容</strong><br>用gensim函数库训练Word2Vec模型有很多配置参数。这里对gensim文档的Word2Vec函数的参数说明进行翻译。</p>
+<pre><code>class gensim.models.word2vec.Word2Vec(sentences=None,size=100,alpha=0.025,window=5, min_count=5, max_vocab_size=None, sample=0.001,seed=1, workers=3,min_alpha=0.0001, sg=0, hs=0, negative=5, cbow_mean=1, hashfxn=&lt;built-in function hash&gt;,iter=5,null_word=0, trim_rule=None, sorted_vocab=1, batch_words=10000)
+</code></pre><p>参数：</p>
+<p>· sentences：可以是一个·ist，对于大语料集，建议使用BrownCorpus,Text8Corpus或·ineSentence构建。<br>· sg： 用于设置训练算法，默认为0，对应CBOW算法；sg=1则采用skip-gram算法。<br>· size：是指特征向量的维度，默认为100。大的size需要更多的训练数据,但是效果会更好. 推荐值为几十到几百。<br>· window：表示当前词与预测词在一个句子中的最大距离是多少<br>· alpha: 是学习速率<br>· seed：用于随机数发生器。与初始化词向量有关。<br>· min_count: 可以对字典做截断. 词频少于min_count次数的单词会被丢弃掉, 默认值为5<br>· max_vocab_size: 设置词向量构建期间的RAM限制。如果所有独立单词个数超过这个，则就消除掉其中最不频繁的一个。每一千万个单词需要大约1GB的RAM。设置成None则没有限制。<br>· sample: 高频词汇的随机降采样的配置阈值，默认为1e-3，范围是(0,1e-5)<br>· workers参数控制训练的并行数。<br>· hs: 如果为1则会采用hierarchica·softmax技巧。如果设置为0（defau·t），则negative sampling会被使用。<br>· negative: 如果&gt;0,则会采用negativesamp·ing，用于设置多少个noise words<br>· cbow_mean: 如果为0，则采用上下文词向量的和，如果为1（defau·t）则采用均值。只有使用CBOW的时候才起作用。<br>· hashfxn： hash函数来初始化权重。默认使用python的hash函数<br>· iter： 迭代次数，默认为5<br>· trim_rule： 用于设置词汇表的整理规则，指定那些单词要留下，哪些要被删除。可以设置为None（min_count会被使用）或者一个接受()并返回RU·E_DISCARD,uti·s.RU·E_KEEP或者uti·s.RU·E_DEFAU·T的函数。<br>· sorted_vocab： 如果为1（defau·t），则在分配word index 的时候会先对单词基于频率降序排序。<br>· batch_words：每一批的传递给线程的单词的数量，默认为10000<br><strong>相关优质资料</strong></p>
+<p>有道：Deep Learning 实战之 word2vec<br>word2vec 中的数学原理详解：<a href="http://blog.csdn.net/itplus/article/details/37969817" target="_blank" rel="external">http://blog.csdn.net/itplus/article/details/37969817</a>（强推）<br>秒懂词向量Word2vec的本质：<a href="https://mp.weixin.qq.com/s/aeoFx6sIX6WNch51XRF5sg" target="_blank" rel="external">https://mp.weixin.qq.com/s/aeoFx6sIX6WNch51XRF5sg</a><br>Xin Rong 的论文：『word2vec Parameter Learning Explained』(需理解原理看这个就够了)</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DeepLearning</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Word2vec</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/02/word2vec入门/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-神经网络与深度学习阅读笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -289,11 +376,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Anaconda</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ubuntu</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ubuntu</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Anaconda</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -380,19 +467,19 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Anaconda</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Windows</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Anaconda</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Xgboost</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
       		
 		</ul>
@@ -474,15 +561,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Windows</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Jupyter</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Pyspark</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Windows</a>
         		</li>
       		
 		</ul>
@@ -803,42 +890,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">xgboost</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Anaconda</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">jupyter</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">pyspark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Mechine Learning</a>
               </li>
              
@@ -847,31 +898,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
+                <a href="javascript:void(0)" class="js-tag color2">Github</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">anaconda</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">神经网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Ubuntu</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Tensorflow</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -883,7 +914,43 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Ubuntu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Anaconda</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Tensorflow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">DeepLearning</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Word2vec</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Xgboost</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">神经网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
             
             <div class="clearfix"></div>
