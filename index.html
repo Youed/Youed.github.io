@@ -467,11 +467,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Windows</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Anaconda</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Anaconda</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Windows</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -797,6 +797,114 @@ $ hexo d -g   <span class="comment">#发布成功后，访问yourname.github.io�
 
 
   
+    <article id="post-URL提取互联网账号初步解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/28/URL提取互联网账号初步解析/">URL提取互联网账号初步解析</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/28/URL提取互联网账号初步解析/" class="archive-article-date">
+  	<time datetime="2017-07-28T12:33:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>注</strong><br>以下链接均从dpi数据中或者自己抓包提取<br>URL解码编码网址链接：<br><a href="http://www.convertstring.com/zh_CN/EncodeDecode/UrlDecode" target="_blank" rel="external">http://www.convertstring.com/zh_CN/EncodeDecode/UrlDecode</a><br>在线URL解析&amp;URL参数解析为可读模式工具：<br><a href="http://www.awesometool.org/Format/URL" target="_blank" rel="external">http://www.awesometool.org/Format/URL</a><br>在线加密解密：<br><a href="http://encode.chahuo.com/" target="_blank" rel="external">http://encode.chahuo.com/</a><br>移动应用抓包调试利器Charles：<br><a href="https://www.jianshu.com/p/68684780c1b0" target="_blank" rel="external">https://www.jianshu.com/p/68684780c1b0</a></p>
+<p><strong>对url中账号的挖掘逻辑：</strong><br>一个标准的可以挖掘账号的url链接格式如下：<br> <img src="https://i.imgur.com/6QhHVuc.png" alt=""><br>User部分：提取出非匿名的账号，<br>query部分，类似有username=，user=，user_name，u_user,u_nick，u_account=,u_name=，u= 字段的直接提取；</p>
+<p><strong>Hexo</strong><br>A fast, simple &amp; powerful blog framework。<br><strong>系统环境配置</strong><br>要使用Hexo，需要在你的系统中支持Nodejs以及Git。   </p>
+<hr>
+<h4 id="Step1-安装Node-js"><a href="#Step1-安装Node-js" class="headerlink" title="Step1:安装Node.js"></a>Step1:安装Node.js</h4><p><a href="https://nodejs.org/download/" title="Step1:安装Node.js" target="_blank" rel="external">下载Node.js</a><br>参考地址：<a href="http://www.runoob.com/nodejs/nodejs-install-setup.html" title="安装Node.js" target="_blank" rel="external">安装Node.js</a><strong>（注意node需安装6.2版本以上的，否则不兼容Yilia）</strong>  </p>
+<hr>
+<h4 id="Step2：安装Git"><a href="#Step2：安装Git" class="headerlink" title="Step2：安装Git"></a>Step2：安装Git</h4><p><a href="http://git-scm.com/download/" title="下载Git" target="_blank" rel="external">下载Git</a><br>这里附一个Git的入门教程。<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/" title="Git教程" target="_blank" rel="external">廖雪峰Git教程</a>  </p>
+<hr>
+<h4 id="Step3-安装hexo"><a href="#Step3-安装hexo" class="headerlink" title="Step3:安装hexo"></a>Step3:安装hexo</h4> <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> d:/hexo</div><div class="line">$ npm install hexo-cli -g  </div><div class="line">$ hexo init blog</div><div class="line">$ <span class="built_in">cd</span> blog</div><div class="line">$ npm install</div><div class="line">$ hexo g <span class="comment"># 或者hexo generate</span></div><div class="line">$ hexo s <span class="comment"># 或者hexo server，可以在http://localhost:4000/ 查看</span></div></pre></td></tr></table></figure>
+<p><strong>如果你想折腾，给自己的blog疯狂加插件，这里最好安装cnpm</strong>（<a href="https://npm.taobao.org" target="_blank" rel="external">https://npm.taobao.org</a>）防止被墙（我已遇到过），以后将npm换成cnpm即可。命令:  </p>
+<pre><code class="sh">$ <span class="built_in">cd</span> d:/hexo  //进自己的root目录
+$ npm install -g cnpm --registry=https://registry.npm.taobao.org
+$ cnpm install hexo --save
+$ hexo -v
+</code></pre>
+<p><img src="http://i.imgur.com/NHajyOH.png" alt=""><br>Hexo常用的几个命令：<br>hexo generate (hexo g) 生成静态文件，会在当前目录下生成一个新的叫做public的文件夹<br>hexo server (hexo s) 启动本地web服务，用于博客的预览<br>hexo deploy (hexo d) 部署播客到远端（比如github, heroku等平台）<br>另外还有其他几个常用命令:  </p>
+<pre><code class="sh">$ hexo new <span class="string">"postName"</span> <span class="comment">#新建文章 $ hexo new page "pageName" #新建页面</span>
+$ hexo n == hexo new 
+$ hexo g == hexo generate 
+$ hexo s == hexo server
+$ hexo d == hexo deploy
+$ hexo d -g          <span class="comment">#生成部署 </span>
+$ hexo s -g          <span class="comment">#生成预览</span>
+$ hexo s -p 3600     <span class="comment">#换端口号。当hexo s -g不起作用主要是2个问题，1.端口冲突，用此命令换端口 2，修改host文件</span>
+</code></pre>
+<p>现在我们打开<a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a> 已经可以看到一篇内置的blog了。  </p>
+<h4 id="Step4-安装主题"><a href="#Step4-安装主题" class="headerlink" title="Step4:安装主题"></a>Step4:安装主题</h4><p>Github上最火的主题有NexT与Yilia。想折腾的这里选NexT（官网：<a href="http://theme-next.iissnan.com/" target="_blank" rel="external">http://theme-next.iissnan.com/</a>）<br>安装主题<br>    <code>$ git clone https://github.com/litten/hexo-theme-yilia.git themes/yilia</code><br>在Root有两份主要的配置文件，其名称都是 _config.yml。 其中，一份位于站点根目录下主要包含 Hexo 本身的配置，称为<strong>站点配置文件</strong>；另一份位于主题目录下，这份配置由主题作者提供，主要用于配置主题相关的选项，称为<strong>主题配置文件</strong>。<br>想要搭配自己的插件即配置这2个文件。  </p>
+<h4 id="Step5-发布Blog"><a href="#Step5-发布Blog" class="headerlink" title="Step5:发布Blog"></a>Step5:发布Blog</h4><p>第一次登录需要验证身份信息:  </p>
+<pre><code class="sh">$ git config --global user.name <span class="string">"你的用户名"</span>
+$ git config --global user.email <span class="string">"你的邮箱"</span>
+$ cnpm install hexo-deployer-git --save  //安装Git插件
+$ hexo new <span class="string">"hello"</span>  <span class="comment">#生成一个md文件(/blog/source/_posts/),用编辑器打开hello.md文件,编写完后保存</span>
+$ hexo s -g   <span class="comment"># 一般先在本地预览</span>
+$ hexo d -g   <span class="comment">#发布成功后，访问yourname.github.io看下成果</span>
+</code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">URL，数据挖掘</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/28/URL提取互联网账号初步解析/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
 
 
@@ -906,15 +1014,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jupyter</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Pyspark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
+                <a href="javascript:void(0)" class="js-tag color4">URL，数据挖掘</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -930,11 +1030,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">DeepLearning</a>
+                <a href="javascript:void(0)" class="js-tag color3">Jupyter</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Word2vec</a>
+                <a href="javascript:void(0)" class="js-tag color3">Pyspark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Windows</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -943,6 +1047,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">DeepLearning</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Word2vec</a>
               </li>
              
               <li class="article-tag-list-item">
