@@ -17,7 +17,7 @@
 <meta property="og:description" content="由于个人的测试需要，打算在自己的pc上面安pyspark，来熟悉MLlib。翻了一下bing和狗，方法不少。这里主要介绍下在windows下的安装（安装的时候总是出现各种问题，有条件的还是操作unix吧）我是根据视频https://medium.com/@GalarnykMichael/install-spark-on-windows-pyspark-4498a5d8d66c来操作的，需要翻墙，有">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/arthoZr.png">
-<meta property="og:updated_time" content="2018-03-20T06:16:16.171Z">
+<meta property="og:updated_time" content="2018-06-08T04:33:32.325Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在windows上面安装并用jupyter运行pyspark">
 <meta name="twitter:description" content="由于个人的测试需要，打算在自己的pc上面安pyspark，来熟悉MLlib。翻了一下bing和狗，方法不少。这里主要介绍下在windows下的安装（安装的时候总是出现各种问题，有条件的还是操作unix吧）我是根据视频https://medium.com/@GalarnykMichael/install-spark-on-windows-pyspark-4498a5d8d66c来操作的，需要翻墙，有">
@@ -187,6 +187,7 @@
       
         <p>由于个人的测试需要，打算在自己的pc上面安pyspark，来熟悉MLlib。<br>翻了一下bing和狗，方法不少。这里主要介绍下在windows下的安装（安装的时候总是出现各种问题，有条件的还是操作unix吧）<br>我是根据视频<a href="https://medium.com/@GalarnykMichael/install-spark-on-windows-pyspark-4498a5d8d66c" target="_blank" rel="external">https://medium.com/@GalarnykMichael/install-spark-on-windows-pyspark-4498a5d8d66c</a>来操作的，需要翻墙，有条件的同学可以看下，讲的特别详细。</p>
 <hr>
+<a id="more"></a>
 <h4 id="Step1-安装Anaconda-GOW"><a href="#Step1-安装Anaconda-GOW" class="headerlink" title="Step1:安装Anaconda,GOW"></a>Step1:安装Anaconda,GOW</h4><p>前者的安装我就不写了。地址是<br><a href="https://repo.continuum.io/archive/" target="_blank" rel="external">https://repo.continuum.io/archive/</a><br>我的机器上面装的miniconda。<br>GOW的地址：<br><a href="https://github.com/bmatzelle/gow/releases/download/v0.8.0/Gow-0.8.0.exe" target="_blank" rel="external">https://github.com/bmatzelle/gow/releases/download/v0.8.0/Gow-0.8.0.exe</a><br>GOW的作用是在cmd下面执行linux 命令。安装结束之后可以运行：<br>    gow –list<br>如果安装正确，可以返回<br><img src="https://i.imgur.com/arthoZr.png" alt=""></p>
 <hr>
 <h4 id="Step2：安装spark"><a href="#Step2：安装spark" class="headerlink" title="Step2：安装spark"></a>Step2：安装spark</h4><p>spark的地址：<br><a href="http://spark.apache.org/downloads.html" target="_blank" rel="external">http://spark.apache.org/downloads.html</a><br>我选的是default的设置下的版本: spark-2.1.1-bin-hadoop2.7.tgz.<br>下载好后，记一下路径名称。<br> <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">open cmd prompt</div><div class="line">mkdir C:\opt\spark</div><div class="line">mv C:\Users\neal\Downloads\spark-2.1.1-bin-hadoop2.7.tgz C:\opt\spark\spark-2.1.1-bin-hadoop2.7.tgz</div><div class="line">gzip -d spark-2.1.1-bin-hadoop2.7.tgz</div><div class="line">tar xvf spark-2.1.1-bin-hadoop2.7.tar</div><div class="line">install winutils.exe</div><div class="line">curl -k -L -o winutils.exe https://github.com/steveloughran/winutils/blOb/master/hadoop-2.6.0/bin/winutils.exe?raw=<span class="literal">true</span></div></pre></td></tr></table></figure></p>

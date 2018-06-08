@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://i.imgur.com/GYZMvgQ.png">
 <meta property="og:image" content="https://i.imgur.com/V6zqbLl.png">
 <meta property="og:image" content="https://i.imgur.com/9Qcqg7Q.png">
-<meta property="og:updated_time" content="2018-06-06T02:47:08.416Z">
+<meta property="og:updated_time" content="2018-06-08T04:36:26.645Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DeepLearning——Word2vec笔记">
 <meta name="twitter:description" content="常见的统计语言模型参考：有道的Deep Learning 实战之 word2vec1. 上下文无关模型2. n-gram3. n-pos n-pos 只是 n-gram 的一种衍生模型。n-gram 模型假定第t个词出现概率条件依赖它前N-1个词，而现实中很多词出现的概率是条件依赖于它前面词的语法功能的。n-pos模型就是基于这种假设的模型，它将词按照其语法功能进行分类，由这些词类决定下一个词出现">
@@ -188,6 +188,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="常见的统计语言模型"><a href="#常见的统计语言模型" class="headerlink" title="常见的统计语言模型"></a>常见的统计语言模型</h2><p>参考：有道的Deep Learning 实战之 word2vec<br><strong>1. 上下文无关模型</strong><br><strong>2. n-gram</strong><br><strong>3. n-pos</strong><br> n-pos 只是 n-gram 的一种衍生模型。n-gram 模型假定第t个词出现概率条件依赖它前N-1个词，而现实中很多词出现的概率是条件依赖于它前面词的语法功能的。n-pos模型就是基于这种假设的模型，它将词按照其语法功能进行分类，由这些词类决定下一个词出现的概率。这样的词类称为词性（Part-of-Speech，简称为 POS）<br><strong>4. 基于决策树的语言模型</strong><br><strong>5. 最大熵模型</strong><br><strong>6. 自适应模型</strong><br>前面的模型概率分布都是预先从训练语料库中估算好的，属于<strong>静态语言模型</strong>。而自适应语言模型类似是 Online Learning 的过程，即根据少量新数据动态调整模型，属于动态模型。 在自然语言中，经常出现这样现象：某些在文本中通常很少出现的词，在某一局部文本中突然大量地出现。能够根据词在局部文本中出现的情况动态地调整语言模型中的概率分布数据的语言模型成为动态、自适应或者基于缓存的语言模型。 通常的做法是将静态模型与动态模型通过参数融合到一起，这种混合模型可以有效地避免数据稀疏的问题。</p>
+<a id="more"></a>
 <h2 id="g-gram模型"><a href="#g-gram模型" class="headerlink" title="g-gram模型"></a>g-gram模型</h2><p>传统的统计语言模型是表示语言基本单位（一般为句子） 的概率分布函数，这个概率分布也就是该语言的生成模型。一般语言模型可以使用各个词语条件概率的形式表示</p>
 <p><img src="https://i.imgur.com/GYZMvgQ.png" alt=""><br><img src="https://i.imgur.com/V6zqbLl.png" alt=""><br>$$p(s)=p(w_1^T)=p(w_1,w_2,\ldots,w<em>T)=\prod</em>{t=1}^Tp(w_t|Context)$$</p>
 <p><strong>关于n的取值</strong><br>一般来说，$n$的取值需要同时考虑计算复杂度和模型效果2个方面。如表1所示：（词典大小为20000）<br><img src="https://i.imgur.com/9Qcqg7Q.png" alt=""><br>另外，n-gram模型还需要<strong>平滑化</strong>的环节</p>
