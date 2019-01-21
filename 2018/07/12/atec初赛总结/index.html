@@ -41,7 +41,7 @@
 <h3 id="4-1-特征缺失率"><a href="#4-1-特征缺失率" class="headerlink" title="4.1 特征缺失率"></a>4.1 特征缺失率</h3><p>对特征的缺失情况进行分析，得到下面的缺失值和特征数表格。</p>
 <p><img src="https://upload-images.jianshu.io/upload_images/12292185-44f65fe4c64830e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="缺失值-特征数表格.png"></p>
 <p>可以发现虽然一共有298个特征列，但是数据的缺失数量只有13个不同的值，这是否意味着，特征之间有关联（暂时不知道复赛数据的猜测）？可以看到有12个特征他们的缺失情况是925781，大部分的样本都没有数据。只有139个特征的缺失率是低于20%。<br>对于这样的数据分布，我们尝试了不同的特征删除策略：删除缺失率大于20%，30%，40%，50%等等。<br>同时观察测试集的数据，我们发现对于相同的特征，训练集和测试集的缺失情况不尽相同，因此通过对比之后，删除训练集和测试集缺失率相差有点大的列。</p>
-<h3 id="4-2-训练集和测试集的特征分布一致"><a href="#4-2-训练集和测试集的特征分布一致" class="headerlink" title="4.2 训练集和测试集的特征分布一致"></a>4.2 训练集和测试集的特征分布一致</h3><p>正常的情况下，训练集和测试集的特征分布应该一致，这样根据训练集训练得到的模型才对测试集适用。一致的分布意味着，取值范围一致，概率密度核kde分布曲线类似。（图片来自赵振凯）</p>
+<h3 id="4-2-训练集和测试集的特征分布一致"><a href="#4-2-训练集和测试集的特征分布一致" class="headerlink" title="4.2 训练集和测试集的特征分布一致"></a>4.2 训练集和测试集的特征分布一致</h3><p>正常的情况下，训练集和测试集的特征分布应该一致，这样根据训练集训练得到的模型才对测试集适用。一致的分布意味着，取值范围一致，概率密度核kde分布曲线类似。</p>
 <p>以特征f15为例，在训练集和测试集上都只有三个值，且在这三个值上的kde曲线基本重叠。<img src="https://upload-images.jianshu.io/upload_images/12292185-3a406fc5abf8c644.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="f15特征在训练集上的分布、在测试集上的分布、训练集和测试集分布对比"></p>
 <p>而f21特征在训练集上是一个多值分布，而在测试集上是二值分布，通过最后一张对比图可以明显的看出分布的异常。</p>
 <p><img src="https://upload-images.jianshu.io/upload_images/12292185-45fd30172f4fdf4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="f21特征在训练集上的分布、在测试集上的分布、训练集和测试集分布对比"> </p>
@@ -51,7 +51,7 @@
 <li>通过训练集特征与label的pearson相关性选择特征 </li>
 <li>通过观察异常交易在每个特征值上的占比情况选择特征</li>
 </ol>
-<p>以具有区分度的f2特征和不具备区分度的f10特征的对比。图的横坐标是特征的取值，纵坐标是异常交易，即标签为1的样本占特征值为该值的标签的比率。（图片来自曹凯）<br><img src="https://upload-images.jianshu.io/upload_images/12292185-1b6fc73fae3052b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="f2特征值-异常交易占比"></p>
+<p>以具有区分度的f2特征和不具备区分度的f10特征的对比。图的横坐标是特征的取值，纵坐标是异常交易，即标签为1的样本占特征值为该值的标签的比率。<br><img src="https://upload-images.jianshu.io/upload_images/12292185-1b6fc73fae3052b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="f2特征值-异常交易占比"></p>
 <p><img src="https://upload-images.jianshu.io/upload_images/12292185-9ee347b33ac5cd14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="f10特征值-异常交易占比"></p>
 <p>f2特征在取值为2时，异常交易占比达到了0.18，而其余两个值的占比低于0.025，因此当交易的f2出现2值时，有较大的概率为异常交易。反之。f10的三个值占比都很平均，无法通过这个特征单一分析出交易是否是异常交易的概率，对标签不具有敏感性。在特征选择的时候，这样的特征最好删除。</p>
 <h2 id="五、缺失值填充"><a href="#五、缺失值填充" class="headerlink" title="五、缺失值填充"></a>五、缺失值填充</h2><p>在对每个特征进行分析，然后通过实验综合考量得到训练特征之前，我们还需要做特征处理<br>缺失值填充可以分为连续值的缺失值填充和离散值的缺失值填充。连续值的缺失值填充常见的有中值填充、众数填充、均值填充以及使用randomforest等机器学习算法进行填充。缺失值的填充也有众数填充，-1填充以及使用学习算法进行填充。</p>
@@ -87,7 +87,7 @@
 <h3 id="2-5-深度学习DNN"><a href="#2-5-深度学习DNN" class="headerlink" title="2.5 深度学习DNN"></a>2.5 深度学习DNN</h3><p>DNN(Deep Neural Network)神经网络模型又叫全连接神经网络，是基本的深度学习框架。DNN的基石是多层感知机，顾名思义，就是有多个隐含层的感知机。更多的层数让网络更能够刻画现实世界中的复杂情形，因而神经网络的层数直接决定了它对现实的刻画能力。<br><img src="https://upload-images.jianshu.io/upload_images/12292185-b3118363f0a7ff76.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="DNN模型示例"><br>(图片来自网络)</p>
 <p>DNN模型具有超强的拟合能力，但也因此容易陷入过拟合。DNN模型多用于图像处理方面，调参比较复杂，使用起来因为无法直观感受参数变化的实际意义，因此更像黑匣子。因为参数复杂导致了训练调参的开销很大。实际运行的score和lightgbm相似。而在公司PC机上，没有GPU资源，所以在CPU上运行百万级数据的时间开销在小时级别，而lightgbm的时间开销在分钟级别上。</p>
 <h2 id="三、参数优化"><a href="#三、参数优化" class="headerlink" title="三、参数优化"></a>三、参数优化</h2><p>常用的参数优化方式有两种，第一种是使用基于网格搜索grid-search的方式；第二种是基于贝叶斯优化的参数搜索方式，已有的hyperopt包就是这样的最优参数搜索包。</p>
-<h3 id="grid-search参数优化"><a href="#grid-search参数优化" class="headerlink" title="grid-search参数优化"></a>grid-search参数优化</h3><p>基于grid-search的参数优化的本质是给定需要调节的参数名称以及参数值，通过遍历这个参数空间，尝试每一种参数之间的搭配，选择score最高的参数值作为返回。sklearn.model_selection中提供了ParameterGrid方法，可以对给定的参数生成遍历之后的参数组合列表，将这样的参数传入算法中，依次训练即可得到参数空间中最优的参数值。(图片来自赵振凯)<br><img src="https://upload-images.jianshu.io/upload_images/12292185-32483ba56f049f76.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ParameterGrid"></p>
+<h3 id="grid-search参数优化"><a href="#grid-search参数优化" class="headerlink" title="grid-search参数优化"></a>grid-search参数优化</h3><p>基于grid-search的参数优化的本质是给定需要调节的参数名称以及参数值，通过遍历这个参数空间，尝试每一种参数之间的搭配，选择score最高的参数值作为返回。sklearn.model_selection中提供了ParameterGrid方法，可以对给定的参数生成遍历之后的参数组合列表，将这样的参数传入算法中，依次训练即可得到参数空间中最优的参数值。<br><img src="https://upload-images.jianshu.io/upload_images/12292185-32483ba56f049f76.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ParameterGrid"></p>
 <h3 id="hyperopt参数优化"><a href="#hyperopt参数优化" class="headerlink" title="hyperopt参数优化"></a>hyperopt参数优化</h3><p>grid-search 是全空间扫描，所以比较慢。hyperopt是一种通过贝叶斯优化（<a href="https://blog.csdn.net/cqzz513524327/article/details/72772205/" target="_blank" rel="external">贝叶斯优化简介</a>）来调整参数的工具，对于像XGBoost这种参数比较多的算法，可以用它来获取比较好的参数值。</p>
 <p>hyperopt需要对每个参数指定搜索空间，而不是如grid-search中那样指定值，比如参数x在0-1区间内均匀取值，参数y在0-1之间对数取值。然后，可以指定参数优化的搜索算法，如随机搜索(对应是hyperopt.rand.suggest)和模拟退火(对应是hyperopt.anneal.suggest)，TPE算法。</p>
 <h2 id="四、模型融合"><a href="#四、模型融合" class="headerlink" title="四、模型融合"></a>四、模型融合</h2><p>模型融合就是将多个模型的结果重新整理归纳，得到一个更具有泛化能力和精度的最终模型。多模型融合算法可以比单一模型算法有极为明显的效果提升。但是怎样进行有效的融合，充分发挥各个算法的长处</p>
